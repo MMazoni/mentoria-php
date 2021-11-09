@@ -2,6 +2,7 @@ tasks:
   - init: |
       docker-compose pull
   - command: |
+      composer install --working-dir="app/"
       docker-compose up
 ports:
   - port: 31001
