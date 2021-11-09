@@ -1,0 +1,16 @@
+tasks:
+  - init: |
+      docker-compose pull
+  - command: |
+      docker-compose up
+ports:
+  - port: 31001
+    onOpen: ignore
+  - port: 31000
+    onOpen: open-browser
+
+vscode:
+  extensions:
+    - ms-azuretools.vscode-docker
+    - felixfbecker.php-debug
+    - bmewburn.vscode-intelephense-client
