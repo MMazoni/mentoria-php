@@ -20,6 +20,8 @@
         "symfony/yaml": "5.3.*"
     },
     "require-dev": {
+        "php": "*",
+        "symfony/maker-bundle": "^1.36"
     },
     "config": {
         "optimize-autoloader": true,

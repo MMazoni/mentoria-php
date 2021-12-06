@@ -6,6 +6,7 @@ services:
     mysql:
         image: 'mysql:8.0'
         working_dir: /app
+        container_name: mysql
         volumes:
             - './app:/app'
         environment:
