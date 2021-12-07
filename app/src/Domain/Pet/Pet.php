@@ -3,8 +3,10 @@
 namespace App\Domain\Pet;
 
 use App\Application\Pet\CreatePetRequestDto;
-use App\Domain\ContactNumber;
+use App\Application\Pet\CreatePetResponseDto;
+use App\Domain\PetOwner;
 use Doctrine\ORM\Mapping\{Entity, Id, Column, GeneratedValue};
+use JetBrains\PhpStorm\Pure;
 
 #[Entity(repositoryClass: PetRepository::class)]
 class Pet
@@ -24,10 +26,11 @@ class Pet
         #[Column(type: "string")]
         private Breed $breed,
         #[Column(type: "string")]
-        private ContactNumber $contactNumber
+        private PetOwner $owner
     )
     {}
 
+    #[Pure]
     public static function fromDto(
         CreatePetRequestDto $createPetRequestDto
     ): Pet
@@ -37,17 +40,19 @@ class Pet
             $createPetRequestDto->age,
             $createPetRequestDto->animal,
             $createPetRequestDto->breed,
-            $createPetRequestDto->contactNumber
+            $createPetRequestDto->owner
         );
     }
 
-    public function toDto()
+    #[Pure]
+    public function toDto(): CreatePetResponseDto
     {
         return new CreatePetResponseDto(
             $this->id,
             $this->name,
             $this->animal,
-            $this->contactNumber
+            $this->owner->name(),
+            $this->owner->contactNumber()
         );
     }
 }
