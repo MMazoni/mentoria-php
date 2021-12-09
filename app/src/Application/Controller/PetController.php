@@ -56,16 +56,23 @@ class PetController extends AbstractController
 
 		$data = [];
 		foreach ($pets as $pet) {
-			$data[] = [
-				'id' => $pet->getId(),
-				'name' => $pet->getName(),
-				'animal' => $pet->getAnimal(),
-				'breed' => $pet->getBreed(),
-				'owner_name' => $pet->getOwner(),
-			];
+			$data[] = $pet->toArray();
 		}
 		return new JsonResponse($data, Response::HTTP_OK);
 	}
 
+	#[Route('/pet/{id}', name: 'retrieve_one_pet', methods: ['GET'])]
+	public function retrieveOnePet(int $id): JsonResponse
+	{
+		$pet = $this->petRepositoryService->retrieveOnePet($id);
 
+		if (empty($pet)) {
+			return new JsonResponse(
+				['message' => 'Could not find any pet.'],
+				Response::HTTP_NOT_FOUND
+			);
+		}
+
+		return new JsonResponse($pet->toArray(), Response::HTTP_OK);
+	}
 }

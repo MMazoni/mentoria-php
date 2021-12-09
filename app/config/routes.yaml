@@ -7,3 +7,8 @@ retrieve_pets:
   path: /pet
   controller: App\Application\Controller\PetController::retrievePets
   methods: GET
+
+retrieve_one_pet:
+  path: /pet/{id}
+  controller: App\Application\Controller\PetController::retrieveOnePet
+  methods: GET

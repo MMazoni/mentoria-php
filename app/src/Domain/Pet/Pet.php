@@ -56,35 +56,15 @@ class Pet
         );
     }
 
-	public function getId(): int
+	public function toArray(): array
 	{
-		return $this->id;
+		return [
+			'id' => $this->id,
+			'name' => $this->name,
+			'age' => $this->age,
+			'animal' => (string) $this->animal,
+			'breed' => (string) $this->breed,
+			'owner_name' => (string) $this->owner,
+		];
 	}
-
-
-	public function getName(): string
-	{
-		return $this->name;
-	}
-
-	public function getAge(): int
-	{
-		return $this->age;
-	}
-
-	public function getAnimal(): string|Animal
-	{
-		return $this->animal;
-	}
-
-	public function getBreed(): string|Breed
-	{
-		return $this->breed;
-	}
-
-	public function getOwner(): PetOwner|string
-	{
-		return $this->owner;
-	}
-
 }

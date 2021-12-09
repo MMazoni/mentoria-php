@@ -21,4 +21,9 @@ class PetRepositoryService
 	{
 		return $this->petRepository->findAll();
 	}
+
+	public function retrieveOnePet(int $id): Pet
+	{
+		return $this->petRepository->find($id);
+	}
 }
