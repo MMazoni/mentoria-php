@@ -31,4 +31,15 @@ class PetRepositoryService
 	{
 		$this->petRepository->removePet($pet);
 	}
+
+	public function updatePet(int $id, UpdatePetRequestDto $updatePetRequestDto): array
+	{
+		$pet = $this->retrieveOnePet($id);
+		if (empty($pet)) {
+			return [];
+		}
+		$pet->updateValues($updatePetRequestDto);
+		$this->petRepository->addPet($pet);
+		return $pet->toArray();
+	}
 }

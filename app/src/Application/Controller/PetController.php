@@ -4,6 +4,7 @@ namespace App\Application\Controller;
 
 use App\Application\Pet\CreatePetRequestDto;
 use App\Application\Pet\PetRepositoryService;
+use App\Application\Pet\UpdatePetRequestDto;
 use Symfony\Component\HttpFoundation\{JsonResponse, Request, Response};
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -29,7 +30,7 @@ class PetController extends AbstractController
             $payload->owner_ddd,
             $payload->owner_phone_number
         );
-        $response = $this->petRepositoryService->createPet($createPetRequestDto);
+        $petDto = $this->petRepositoryService->createPet($createPetRequestDto);
 
         if (empty($response)) {
             return new JsonResponse([
@@ -37,12 +38,12 @@ class PetController extends AbstractController
                 'code' => Response::HTTP_INTERNAL_SERVER_ERROR
             ]);
         }
-        $data = array_merge(
+        $responseData = array_merge(
             ['message' => 'Pet created successfully.'],
-            $response->toArray()
+			['data' => $petDto->toArray()]
         );
 
-        return new JsonResponse($data, Response::HTTP_OK);
+        return new JsonResponse($responseData, Response::HTTP_CREATED);
     }
 
 	#[Route('/pet', name: 'retrieve_pets', methods: ['GET'])]
@@ -94,5 +95,31 @@ class PetController extends AbstractController
 			['message' => 'Pet deleted.'],
 			Response::HTTP_NO_CONTENT
 		);
+	}
+
+	#[Route('/pet/{id}', name: 'update_pet', methods: ['PUT'])]
+	public function updatePet(int $id, Request $request): JsonResponse
+	{
+		$payload = json_decode($request->getContent(), false);
+		$updatePetRequestDto = new UpdatePetRequestDto(
+			$payload->name,
+			$payload->age,
+			$payload->animal_type,
+			$payload->breed,
+			$payload->owner_name,
+		);
+		$petArray = $this->petRepositoryService->updatePet($id, $updatePetRequestDto);
+
+		if (empty($petArray)) {
+			return new JsonResponse(
+				['message' => 'Could not find the pet.'],
+				Response::HTTP_NOT_FOUND
+			);
+		}
+		$responseData = array_merge(
+			['message' => 'Pet updated successfully.'],
+			['data' => $petArray]
+		);
+		return new JsonResponse($responseData, Response::HTTP_OK);
 	}
 }

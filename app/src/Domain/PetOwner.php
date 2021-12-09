@@ -6,7 +6,7 @@ class PetOwner
 {
     public function __construct(
         private string $name,
-        private ContactNumber $contactNumber
+        private ?ContactNumber $contactNumber
     ) {}
 
     public function name(): string

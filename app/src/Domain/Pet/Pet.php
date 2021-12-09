@@ -4,6 +4,7 @@ namespace App\Domain\Pet;
 
 use App\Application\Pet\CreatePetRequestDto;
 use App\Application\Pet\CreatePetResponseDto;
+use App\Application\Pet\UpdatePetRequestDto;
 use App\Domain\PetOwner;
 use Doctrine\ORM\Mapping\{Entity, Id, Column, GeneratedValue};
 use JetBrains\PhpStorm\Pure;
@@ -66,5 +67,14 @@ class Pet
 			'breed' => (string) $this->breed,
 			'owner_name' => (string) $this->owner,
 		];
+	}
+
+	public function updateValues(UpdatePetRequestDto $updatePetRequestDto)
+	{
+		$this->name = $updatePetRequestDto->name;
+		$this->age = $updatePetRequestDto->age;
+		$this->animal = $updatePetRequestDto->animal;
+		$this->breed = $updatePetRequestDto->breed;
+		$this->owner = $updatePetRequestDto->ownerName;
 	}
 }
