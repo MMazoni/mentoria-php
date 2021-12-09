@@ -17,7 +17,7 @@ class PetController extends AbstractController
     {}
 
     #[Route('/pet', name: 'create_pet', methods: ['POST'])]
-    public function createPet(Request $request): JsonResponse
+		public function createPet(Request $request): JsonResponse
     {
         $payload = json_decode($request->getContent(), false);
         $createPetRequestDto = new CreatePetRequestDto(
@@ -44,4 +44,28 @@ class PetController extends AbstractController
 
         return new JsonResponse($data, Response::HTTP_OK);
     }
+
+	#[Route('/pet', name: 'retrieve_pets', methods: ['GET'])]
+	public function retrievePets(): JsonResponse
+	{
+		$pets = $this->petRepositoryService->retrievePets();
+
+		if (empty($pets)) {
+			return new JsonResponse([], Response::HTTP_NO_CONTENT);
+		}
+
+		$data = [];
+		foreach ($pets as $pet) {
+			$data[] = [
+				'id' => $pet->getId(),
+				'name' => $pet->getName(),
+				'animal' => $pet->getAnimal(),
+				'breed' => $pet->getBreed(),
+				'owner_name' => $pet->getOwner(),
+			];
+		}
+		return new JsonResponse($data, Response::HTTP_OK);
+	}
+
+
 }

@@ -16,4 +16,9 @@ class PetRepositoryService
         $this->petRepository->addPet($pet);
         return $pet->toDto();
     }
+
+	public function retrievePets(): array
+	{
+		return $this->petRepository->findAll();
+	}
 }

@@ -22,11 +22,11 @@ class Pet
         #[Column(type: "integer")]
         private int $age,
         #[Column(type: "string")]
-        private Animal $animal,
+        private Animal|string $animal,
         #[Column(type: "string")]
-        private Breed $breed,
+        private Breed|string $breed,
         #[Column(type: "string")]
-        private PetOwner $owner
+        private PetOwner|string $owner
     )
     {}
 
@@ -55,4 +55,36 @@ class Pet
             $this->owner->contactNumber()
         );
     }
+
+	public function getId(): int
+	{
+		return $this->id;
+	}
+
+
+	public function getName(): string
+	{
+		return $this->name;
+	}
+
+	public function getAge(): int
+	{
+		return $this->age;
+	}
+
+	public function getAnimal(): string|Animal
+	{
+		return $this->animal;
+	}
+
+	public function getBreed(): string|Breed
+	{
+		return $this->breed;
+	}
+
+	public function getOwner(): PetOwner|string
+	{
+		return $this->owner;
+	}
+
 }

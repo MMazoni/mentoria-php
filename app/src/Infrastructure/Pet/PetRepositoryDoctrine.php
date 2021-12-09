@@ -32,4 +32,9 @@ class PetRepositoryDoctrine implements PetRepositoryInterface
     {
         return $this->petRepository->find($id);
     }
+
+	public function findAll(): array
+	{
+		return $this->petRepository->findAll();
+	}
 }
