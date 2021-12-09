@@ -68,11 +68,31 @@ class PetController extends AbstractController
 
 		if (empty($pet)) {
 			return new JsonResponse(
-				['message' => 'Could not find any pet.'],
+				['message' => 'Could not find the pet.'],
 				Response::HTTP_NOT_FOUND
 			);
 		}
 
 		return new JsonResponse($pet->toArray(), Response::HTTP_OK);
+	}
+
+	#[Route('/pet/{id}', name: 'delete_pet', methods: ['DELETE'])]
+	public function deletePet(int $id): JsonResponse
+	{
+		$pet = $this->petRepositoryService->retrieveOnePet($id);
+
+		if (empty($pet)) {
+			return new JsonResponse(
+				['message' => 'Could not find the pet.'],
+				Response::HTTP_NOT_FOUND
+			);
+		}
+
+		$this->petRepositoryService->deletePet($pet);
+
+		return new JsonResponse(
+			['message' => 'Pet deleted.'],
+			Response::HTTP_NO_CONTENT
+		);
 	}
 }

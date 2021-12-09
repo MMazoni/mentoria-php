@@ -26,4 +26,9 @@ class PetRepositoryService
 	{
 		return $this->petRepository->find($id);
 	}
+
+	public function deletePet(Pet $pet)
+	{
+		$this->petRepository->removePet($pet);
+	}
 }

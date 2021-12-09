@@ -37,4 +37,10 @@ class PetRepositoryDoctrine implements PetRepositoryInterface
 	{
 		return $this->petRepository->findAll();
 	}
+
+	public function removePet(Pet $pet): void
+	{
+		$this->entityManager->remove($pet);
+		$this->entityManager->flush();
+	}
 }
