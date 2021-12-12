@@ -7,8 +7,10 @@ tasks:
 ports:
   - port: 31001
     onOpen: ignore
+    visibility: public
   - port: 31000
     onOpen: open-browser
+    visibility: public
 
 vscode:
   extensions:
