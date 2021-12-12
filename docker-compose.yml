@@ -32,5 +32,6 @@ services:
         volumes:
             - './app:/app'
             - './phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/8.0/fpm/conf.d/99-overrides.ini'
+            - './phpdocker/php-fpm/xdebug.ini:/etc/php/8.0/fpm/conf.d/20-xdebug.ini'
         environment:
           PHP_IDE_CONFIG: "serverName=Docker"
