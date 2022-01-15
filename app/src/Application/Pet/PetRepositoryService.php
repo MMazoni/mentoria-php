@@ -2,7 +2,7 @@
 
 namespace App\Application\Pet;
 
-use App\Domain\Pet\Pet;
+use App\Infrastructure\Entity\Pet;
 use App\Domain\Pet\PetRepositoryInterface;
 
 class PetRepositoryService

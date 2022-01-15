@@ -1,14 +1,14 @@
 create_pet:
   path: /pet
-  controller: App\Application\Controller\PetController::createPet
+  controller: App\Infrastructure\Controller\PetController::createPet
   methods: POST
 
 retrieve_pets:
   path: /pet
-  controller: App\Application\Controller\PetController::retrievePets
+  controller: App\Infrastructure\Controller\PetController::retrievePets
   methods: GET
 
 retrieve_one_pet:
   path: /pet/{id}
-  controller: App\Application\Controller\PetController::retrieveOnePet
+  controller: App\Infrastructure\Controller\PetController::retrieveOnePet
   methods: GET

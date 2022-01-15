@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Application\Controller;
+namespace App\Infrastructure\Controller;
 
 use App\Application\Pet\CreatePetRequestDto;
 use App\Application\Pet\PetRepositoryService;

@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Infrastructure\Pet;
+namespace App\Infrastructure\Persistence\Doctrine;
 
 use App\Domain\Pet\Pet;
 use App\Domain\Pet\PetRepositoryInterface;
+use App\Infrastructure\Entity\Pet as PetEntity;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 
@@ -15,7 +16,7 @@ class PetRepositoryDoctrine implements PetRepositoryInterface
         private EntityManagerInterface $entityManager
     )
     {
-        $this->petRepository = $this->entityManager->getRepository(Pet::class);
+        $this->petRepository = $this->entityManager->getRepository(PetEntity::class);
     }
 
     /**
