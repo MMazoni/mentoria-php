@@ -4,10 +4,6 @@ on:
   pull_request:
     branches:
       - main
-    paths:
-      - "**.php"
-      - "dev/ruleset.xml"
-      - ".github/workflows/phpcs.yml"
 
 jobs:
   phpcs:
