@@ -31,8 +31,8 @@ jobs:
           php phpcs.phar --version
 
       - name: Run PHP_CodeSniffer
-        uses: thenabeel/action-phpcs@v2
+        uses: Novusvetus/action-php_codesniffer@1.2.2
         with:
-          files: "**.php" # you may customize glob as needed
+          files: "**.php"
           phpcs_path: php phpcs.phar
           standard: dev/ruleset.xml
