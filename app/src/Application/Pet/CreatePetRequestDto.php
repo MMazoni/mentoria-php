@@ -7,8 +7,7 @@ use App\Domain\Pet\Animal;
 use App\Domain\Pet\Breed;
 use App\Domain\PetOwner;
 
-class CreatePetRequestDto
-{
+class CreatePetRequestDto {
     public Animal $animal;
     public Breed $breed;
     public ContactNumber $contactNumber;
