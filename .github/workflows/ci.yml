@@ -1,13 +1,6 @@
 name: Build PHPCodeSniffer
 
-on:
-  pull_request:
-    branches:
-      - main
-    paths:
-      - "**.php"
-      - "dev/ruleset.xml"
-      - ".github/workflows/ci.yml"
+on: pull_request
 
 jobs:
   phpcs:
@@ -24,17 +17,15 @@ jobs:
       #     tools: "phpcs, composer:v1"
       #   env:
       #     runner: self-hosted # This config is necessary to run act (Github Action Locally)
-
-      - name: Install PHP_CodeSniffer
-        run: |
-          curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
-          php phpcs.phar --version
-
-      - name: Run PHP_CodeSniffer go
+      # - name: Install PHP_CodeSniffer
+      #   run: |
+      #     curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
+      #     php phpcs.phar --version
+      - name: Run PHP_CodeSniffer
         uses: rtCamp/action-phpcs-code-review@v2
         env:
           GH_BOT_TOKEN: ${{ secrets.SNIFFER_PERSONAL_TOKEN }}
-          SKIP_FOLDERS: ""
+          SKIP_FOLDERS: "app/migrations"
           PHPCS_SNIFFS_EXCLUDE: ""
           PHPCS_FILE_PATH: phpcs.phar
           PHPCS_STANDARD_FILE_NAME: dev/ruleset.xml
